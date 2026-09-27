@@ -2,11 +2,10 @@
 
 import { Briefcase } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -37,21 +36,22 @@ export default function Navbar() {
                 </Button>
               </Link>
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button
-                    variant="ghost"
-                    className="relative h-8 w-8 rounded-full"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-primary text-white">
-                        {session.user.name[0].toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
+                <DropdownMenuTrigger
+                  className={buttonVariants({
+                    variant: "ghost",
+                    size: "icon",
+                    className: "relative rounded-full",
+                  })}
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-primary text-white">
+                      {session.user.name[0].toUpperCase()}
+                     </AvatarFallback>
+                  </Avatar>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent className="w-56" align="end">
-                  <DropdownMenuLabel className="font-normal">
+                  <div className="px-1.5 py-1 font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">
                         {session.user.name}
@@ -60,7 +60,7 @@ export default function Navbar() {
                         {session.user.email}
                       </p>
                     </div>
-                  </DropdownMenuLabel>
+                  </div>
                   <SignOutButton />
                 </DropdownMenuContent>
               </DropdownMenu>
